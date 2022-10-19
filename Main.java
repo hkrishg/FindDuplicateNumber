@@ -34,6 +34,35 @@ class Main {
     return -1;
   }
 
+  // We are given an unsorted array containing ‘n’ numbers taken from the range 1
+  // to ‘n’. The array has some duplicates, find all the duplicate numbers without
+  // using any extra space.
+
+  // Example 1:
+
+  // Input: [3, 4, 4, 5, 5]
+  // Output: [4, 5]
+
+  private static List<Integer> findAllDuplicateNumber(int[] arr) {
+    int i = 0;
+    while (i < arr.length) {
+      if (arr[i] != arr[arr[i] - 1]) {
+        Main.swap(arr, i, arr[i] - 1);
+      } else {
+        i++;
+      }
+    }
+
+    List<Integer> duplicateNumbers = new ArrayList<>();
+
+    for (i = 0; i < arr.length; i++) {
+      if (arr[i] != i + 1)
+        duplicateNumbers.add(arr[i]);
+    }
+
+    return duplicateNumbers;
+  }
+
   private static void swap(int[] arr, int i, int j) {
     int temp = arr[j];
     arr[j] = arr[i];
@@ -43,5 +72,7 @@ class Main {
   public static void main(String[] args) {
     int[] result = new int[] { 1, 4, 4, 3, 2 };
     System.out.println(Main.findDuplicateNumber(result));
+    int[] result2 = new int[] { 3, 4, 4, 5, 5 };
+    System.out.println(Main.findAllDuplicateNumber(result2));
   }
 }
